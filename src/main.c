@@ -6,22 +6,23 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/10 17:46:53 by gafreire         ###   ########.fr       */
+/*   Updated: 2025/12/17 11:33:44 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
+#include "libft.h"
 
 
 int check_map(char *map)
 {
     int len;
 
-    len = strlen(map); // change function
+    len = ft_strlen(map); // change function
     if (len > 4)
     {
-        if (strncmp(map + (len - 4),".cub",4) != 0 && strncmp(map + (len - 4),".xpm",4) != 0 )//change function
+        if (ft_strncmp(map + (len - 4),".cub",4) != 0 && strncmp(map + (len - 4),".xpm",4) != 0 )//change function
             return (printf("File invalid\n"),-1);
     }
     else
