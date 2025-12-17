@@ -3,8 +3,8 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -I./include -I./libft
 
-SRC = \
-    src/main.c
+SRC = src/main.c \
+      src/parser/parser_map.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -16,10 +16,10 @@ LIBFT = $(LIB_DIR)/libft.a
 all: banner $(LIBFT) $(NAME)
 
 $(LIBFT):
-	@$(MAKE) -C $(LIB_DIR) -s
+	@$(MAKE) -C $(LIB_DIR) >/dev/null 2>&1
 
 $(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) >/dev/null 2>&1
 	@echo "✅ $(NAME) linked successfully."
 
 %.o: %.c
@@ -28,12 +28,12 @@ $(NAME): $(OBJ) $(LIBFT)
 
 clean:
 	@$(RM) $(OBJ)
-	@$(MAKE) -C $(LIB_DIR) clean -s
+	@$(MAKE) -C $(LIB_DIR) clean >/dev/null 2>&1
 	@echo "🧹 Object files removed."
 
 fclean: clean
 	@$(RM) $(NAME)
-	@$(MAKE) -C $(LIB_DIR) fclean -s
+	@$(MAKE) -C $(LIB_DIR) fclean >/dev/null 2>&1
 	@echo "🗑️ Executable and libraries removed."
 
 re: fclean all
