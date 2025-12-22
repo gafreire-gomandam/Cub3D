@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cubed.h                                            :+:      :+:    :+:   */
+/*   parser_game.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 12:52:19 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/22 14:55:27 by gafreire         ###   ########.fr       */
+/*   Created: 2025/12/20 18:47:27 by gafreire          #+#    #+#             */
+/*   Updated: 2025/12/22 14:55:13 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUBED_H
-#define CUBED_H
+#include "cubed.h"
 
-#include "libft.h"
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
-
-int check_map(char *map);
-int parse_cub(char *map);
-
-
-#endif
+int parse_cub(char *map)
+{
+    
+}

@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/17 13:41:42 by gafreire         ###   ########.fr       */
+/*   Updated: 2025/12/22 14:57:07 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,20 +21,20 @@ int main (int argc, char *argv[])
     {
         if (check_map(argv[1]))
         {
-            //  if (parse_cub(argv[1])) // change name
-            //  {
+            if (parse_game(argv[1])) // change name
+            {
             //     init_game();
             //     render();
             //     mlx_loop();
             //     free(struct);
             //     return (0);
-            //  }
+                printf ("Is ok\n");
+            }
             //  else
             //  {
             //     // free(struct);
             //     return (-1);
             //  }
-            printf ("Is ok\n");
         }
         else
             return (printf("Exit\n"),-1);
