@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:54:10 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/17 13:42:29 by gafreire         ###   ########.fr       */
+/*   Updated: 2025/12/20 18:43:18 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static int check_file(char *map)
     len = ft_strlen(map);
     if (len > 4)
     {
-        if (ft_strncmp(map + (len - 4),".cub",4) != 0 && ft_strncmp(map + (len - 4),".xpm",4) != 0 )
-            return (printf("File invalid\n"),1); // change function
+        if (ft_strncmp(map + (len - 4),".cub",4) != 0 && ft_strncmp(map + (len - 4),".xpm",4) != 0 ) // delete xpm
+            return (printf("File invalid\n"),0); // change function
     }
     else
-        return (printf("Not valid map\n"),1);
-    return (0);
+        return (printf("Not valid map\n"),0);
+    return (1);
 }
 
 static int check_info (char *map) // change name function
@@ -33,17 +33,17 @@ static int check_info (char *map) // change name function
 
     fd = open(map,O_RDONLY);
     if (fd < 0)
-     return (1);
+     return (0);
     
     close(fd);
-    return (0);
+    return (printf("Open file\n"),1);
 }
 
 int check_map(char *map)
 {
     if (!check_file(map))
-        return (1);
+        return (0);
     if (!check_info(map))
-        return (printf("Error open"),1);
-    return (0);
+        return (printf("Error open\n"),0);
+    return (1);
 }
