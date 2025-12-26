@@ -3,8 +3,11 @@ CC = cc
 
 CFLAGS = -Wall -Werror -Wextra -I./include -I./libft
 
-SRC = src/main.c \
-      src/parser/parser_map.c
+SRC = gnl/get_next_line_utils.c \
+	  gnl/get_next_line.c \
+	  src/main.c \
+      src/parser/parser_map.c \
+      src/parser/parser_game.c
 
 OBJ = $(SRC:.c=.o)
 
