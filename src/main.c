@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/22 14:57:07 by gafreire         ###   ########.fr       */
+/*   Updated: 2025/12/22 17:32:55 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,10 @@ int main (int argc, char *argv[])
     {
         if (check_map(argv[1]))
         {
-            if (parse_game(argv[1])) // change name
+            // create struct
+            if (parse_game(argv[1])) 
             {
-            //     init_game();
-            //     render();
-            //     mlx_loop();
-            //     free(struct);
-            //     return (0);
-                printf ("Is ok\n");
+                return (0);
             }
             //  else
             //  {
