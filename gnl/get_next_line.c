@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 16:52:08 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/22 17:11:50 by gafreire         ###   ########.fr       */
+/*   Updated: 2025/12/30 13:09:58 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*read_newline(int fd, char *line_buffer, char *buffer)
 		if (size < 0)
 			return (free (buffer), free (line_buffer), line_buffer = NULL);
 		buffer[size] = '\0';
-		line_buffer = ft_strjoin_gnl(buffer, buffer);
+		line_buffer = ft_strjoin_gnl(line_buffer, buffer);
 		if (!line_buffer)
 			return (free (buffer), NULL);
 	}
