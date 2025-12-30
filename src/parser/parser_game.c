@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 18:47:27 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/30 17:02:24 by gafreire         ###   ########.fr       */
+/*   Updated: 2025/12/30 18:34:19 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	parse_game(char *map, t_game *game)
 	int		fd;
 	char	*line;
 	t_list	*new_node;
-	t_list	*temp;
+	// t_list	*temp;
 
 	game->map_list = NULL; // i initialize the list to null to avoid trash
 	fd = open(map, O_RDONLY);
@@ -64,13 +64,13 @@ int	parse_game(char *map, t_game *game)
 	//     mlx_loop();
 	//     free(struct);
 	close(fd);
-	printf("--- READING COMPLETED ---\n");
-	temp = game->map_list;
-	while (temp)
-	{
-		printf("Guardado: %s", (char *)temp->content);
-		temp = temp->next;
-	}
+	// printf("--- READING COMPLETED ---\n");
+	// temp = game->map_list;
+	// while (temp)
+	// {
+	// 	printf("Guardado: %s", (char *)temp->content);
+	// 	temp = temp->next;
+	// }
 	return (1);
 }
 
