@@ -11,24 +11,21 @@
 /* ************************************************************************** */
 
 #ifndef CUBED_H
-#define CUBED_H
+# define CUBED_H
 
-#include "libft.h"
-#include "get_next_line.h"
-#include <stdio.h>
-#include <string.h>
-#include <fcntl.h>
+# include "get_next_line.h"
+# include "libft.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include <string.h>
 
 typedef struct s_game
 {
-    t_list *map_list;
-    // .... add more things here later (player,textres,etc....)
-} t_game;
+	t_list	*map_list;
+	// .... add more things here later (player,textres,etc....)
+}			t_game;
 
-
-
-int check_map(char *map);
-int parse_game(char *map, t_game *game);
-
+int			check_map(char *map);
+int			parse_game(char *map, t_game *game);
 
 #endif

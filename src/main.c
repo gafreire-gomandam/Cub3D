@@ -12,29 +12,29 @@
 
 #include "cubed.h"
 
-
-int main (int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
-    t_game game;
-    if (argc !=2)
-        printf("Error arguments\n");
-    else
-    {
-        if (check_map(argv[1]))
-        {
-            // create struct
-            if (parse_game(argv[1],&game)) 
-            {
-                return (0);
-            }
-            //  else
-            //  {
-            //     // free(struct);
-            //     return (-1);
-            //  }
-        }
-        else
-            return (printf("Exit\n"),-1);
-    }
-    return (0);
+	t_game	game;
+
+	if (argc != 2)
+		printf("Error arguments\n");
+	else
+	{
+		if (check_map(argv[1]))
+		{
+			// create struct
+			if (parse_game(argv[1], &game))
+			{
+				return (0);
+			}
+			//  else
+			//  {
+			//     // free(struct);
+			//     return (-1);
+			//  }
+		}
+		else
+			return (printf("Exit\n"), -1);
+	}
+	return (0);
 }
