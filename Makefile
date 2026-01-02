@@ -10,7 +10,8 @@ SRC = gnl/get_next_line_utils.c \
       src/parser/parser_game.c \
 	  src/parser/parser_info.c \
 	  src/init/init_game.c \
-	  src/parser/parser_matrix.c
+	  src/parser/parser_matrix.c \
+	  src/parser/parser_check.c
 
 OBJ = $(SRC:.c=.o)
 

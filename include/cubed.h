@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:52:19 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/30 20:04:59 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/02 14:19:07 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,10 @@ typedef struct s_game
 
 	char	**map;
 	int		map_height;
+
+    int     player_x;
+    int     player_y;
+    char    player_dir;
 }			t_game;
 
 // src/parse/parse_map
@@ -43,6 +47,9 @@ int			get_map_info(t_game *game);
 
 // src/parse/parse_matrix
 int			create_map_matrix(t_game *game);
+
+// src/parse/parse_check
+int validate_map_content(t_game *game);
 
 // src/init
 void		init_game(t_game *game);
