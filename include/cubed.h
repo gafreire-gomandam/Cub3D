@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:52:19 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/02 14:19:07 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/02 20:54:37 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,26 @@ typedef struct s_game
     char    player_dir;
 }			t_game;
 
-// src/parse/parse_map
+// src/parse/parser_map
 int			check_map(char *map);
-// src/parse/parse_game
+// src/parse/parser_game
 int			parse_game(char *map, t_game *game);
-// src/parse/parse_info
+// src/parse/parser_info
 int			get_map_info(t_game *game);
 
-// src/parse/parse_matrix
+// src/parse/parser_matrix
 int			create_map_matrix(t_game *game);
 
-// src/parse/parse_check
+// src/parse/parser_check
 int validate_map_content(t_game *game);
+
+// src/parse/parser_flood
+int check_map_closed(t_game *game);
 
 // src/init
 void		init_game(t_game *game);
+
+void    free_list(t_list **list);
+int     free_resources(t_game *game);
 
 #endif
