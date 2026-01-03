@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:52:19 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/30 16:45:21 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/02 14:19:07 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,36 @@
 typedef struct s_game
 {
 	t_list	*map_list;
-	// .... add more things here later (player,textres,etc....)
+	char	*tex_north;
+	char	*tex_south;
+	char	*tex_west;
+	char	*tex_east;
+
+	char	*color_floor;
+	char	*color_ceiling;
+
+	char	**map;
+	int		map_height;
+
+    int     player_x;
+    int     player_y;
+    char    player_dir;
 }			t_game;
 
+// src/parse/parse_map
 int			check_map(char *map);
+// src/parse/parse_game
 int			parse_game(char *map, t_game *game);
+// src/parse/parse_info
+int			get_map_info(t_game *game);
+
+// src/parse/parse_matrix
+int			create_map_matrix(t_game *game);
+
+// src/parse/parse_check
+int validate_map_content(t_game *game);
+
+// src/init
+void		init_game(t_game *game);
 
 #endif
