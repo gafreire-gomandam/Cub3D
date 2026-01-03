@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:41:17 by gafreire          #+#    #+#             */
-/*   Updated: 2025/12/30 20:03:01 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 12:57:48 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,9 @@ void	init_game(t_game *game)
 	game->tex_east = NULL;
 	game->color_floor = NULL;
 	game->color_ceiling = NULL;
+	game->map = NULL;
+	game->map_height = 0;
+	game->player_x = 0;
+	game->player_y = 0;
+	game->player_dir = 0;
 }

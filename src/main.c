@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 12:02:36 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 12:52:12 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	main(int argc, char *argv[])
 			if (parse_game(argv[1], &game))
 			{
 				// 1. extract textures
-				get_map_info(&game);
+				if (!get_map_info(&game)) 
+				    return (free_resources(&game),1);
 				// 2. extract map
 				if (!create_map_matrix(&game))
 					return (free_resources(&game), 1);

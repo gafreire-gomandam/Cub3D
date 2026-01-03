@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:25:29 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 12:21:32 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 12:54:18 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ char	*get_texture(char *line, char *id)
 	free(tmp);
 	return (path);
 }
+/*
+	Auxiliar function:
+		check missing textures
+*/
+
+static int	check_missing_data(t_game *game)
+{
+	if (!game->tex_north || !game->tex_south || !game->tex_west
+		|| !game->tex_east || !game->color_floor || !game->color_ceiling)
+		return (printf("Error: Missing texture or color identifier\n"), 0);
+	return (1);
+}
 
 /*
 	Main function:
@@ -46,6 +58,7 @@ char	*get_texture(char *line, char *id)
 			Use ft_strncmp to see if it starts with NO, SO, etc.
 		2. If we find a 1, it means the map starts. Stop processing.
 */
+
 int	get_map_info(t_game *game)
 {
 	t_list	*tmp;
@@ -56,21 +69,48 @@ int	get_map_info(t_game *game)
 	{
 		line = (char *)tmp->content;
 		if (ft_strncmp(line, "NO", 2) == 0)
+		{
+			if (game->tex_north)
+				return (printf("Error: Duplicate texture NO\n"), 0);
 			game->tex_north = get_texture(line, "NO");
+		}
 		else if (ft_strncmp(line, "SO", 2) == 0)
+		{
+			if (game->tex_south)
+				return (printf("Error: Duplicate texture SO\n"), 0);
 			game->tex_south = get_texture(line, "SO");
+		}
 		else if (ft_strncmp(line, "WE", 2) == 0)
+		{
+			if (game->tex_west)
+				return (printf("Error: Duplicate texture WE\n"), 0);
 			game->tex_west = get_texture(line, "WE");
+		}
 		else if (ft_strncmp(line, "EA", 2) == 0)
+		{
+			if (game->tex_east)
+				return (printf("Error: Duplicate texture EA\n"), 0);
 			game->tex_east = get_texture(line, "EA");
+		}
 		else if (ft_strncmp(line, "F", 1) == 0)
+		{
+			if (game->color_floor)
+				return (printf("Error: Duplicate color F\n"), 0);
 			game->color_floor = get_texture(line, "F");
+		}
 		else if (ft_strncmp(line, "C", 1) == 0)
+		{
+			if (game->color_ceiling)
+				return (printf("Error: Duplicate color C\n"), 0);
 			game->color_ceiling = get_texture(line, "C");
+		}
 		else if (line[0] == '1' || line[0] == '0')
 			break ;
 		tmp = tmp->next;
 	}
+	if (!check_missing_data(game))
+		return (0);
+	// DEBUG
 	printf("Norte: %s\n", game->tex_north);
 	printf("Sur:   %s\n", game->tex_south);
 	printf("Oeste: %s\n", game->tex_west);
