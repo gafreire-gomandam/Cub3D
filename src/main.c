@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/02 14:25:01 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 12:52:12 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,20 @@ int	main(int argc, char *argv[])
 			if (parse_game(argv[1], &game))
 			{
 				// 1. extract textures
-				get_map_info(&game);
+				if (!get_map_info(&game)) 
+				    return (free_resources(&game),1);
 				// 2. extract map
-				create_map_matrix(&game);
-				printf("CChecking map contents...\n");
+				if (!create_map_matrix(&game))
+					return (free_resources(&game), 1);
+				// 3. IMPORTANT! The list is no longer valid; convert it to a matrix
+				free_list(&game.map_list);
+				printf("Checking map contents...\n");
 				if (!validate_map_content(&game))
-				{
-				    // Clean up memory if it fails
-				    return (1);
-				}
-				printf("¡Valid map! Player in (%d, %d) looking %c\n", 
-				       game.player_x, game.player_y, game.player_dir);
-				
+					return (free_resources(&game), 1);
+				if (!check_map_closed(&game))
+					return (free_resources(&game), 1);
+				printf("¡Valid map! Player in (%d, %d) looking %c\n",
+					game.player_x, game.player_y, game.player_dir);
 				// (DEBUG)
 				y = 0;
 				printf("\n--- MAP IN ARRAY ---\n");
@@ -48,6 +50,8 @@ int	main(int argc, char *argv[])
 					printf("%s\n", game.map[y]);
 					y++;
 				}
+				// 4. at the end general cleanup
+				free_resources(&game);
 				return (0);
 			}
 			//  else
