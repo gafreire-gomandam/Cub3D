@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 12:52:12 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 17:02:10 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,15 @@ int	main(int argc, char *argv[])
 			if (parse_game(argv[1], &game))
 			{
 				// 1. extract textures
-				if (!get_map_info(&game)) 
-				    return (free_resources(&game),1);
-				// 2. extract map
+				if (!get_map_info(&game))
+					return (free_resources(&game), 1);
+				// 2. verify identifiers
+				if (!verify_identifiers(&game))
+					return (free_resources(&game), 1);
+				// 3. extract map
 				if (!create_map_matrix(&game))
 					return (free_resources(&game), 1);
-				// 3. IMPORTANT! The list is no longer valid; convert it to a matrix
+				// 4. IMPORTANT! The list is no longer valid; convert it to a matrix
 				free_list(&game.map_list);
 				printf("Checking map contents...\n");
 				if (!validate_map_content(&game))
@@ -50,7 +53,7 @@ int	main(int argc, char *argv[])
 					printf("%s\n", game.map[y]);
 					y++;
 				}
-				// 4. at the end general cleanup
+				// 5. at the end general cleanup
 				free_resources(&game);
 				return (0);
 			}

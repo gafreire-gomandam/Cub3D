@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:54:10 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/02 13:41:43 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 13:56:19 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	check_file(char *map)
 	len = ft_strlen(map);
 	if (len > 4)
 	{
-		if (ft_strncmp(map + (len - 4), ".cub", 4) != 0 && ft_strncmp(map + (len
-					- 4), ".xpm", 4) != 0) // delete xpm
+		if (ft_strncmp(map + (len - 4), ".cub", 4) != 0)
 			return (printf("File invalid\n"),
 				0);                                                      
 				// change function
