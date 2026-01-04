@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:25:29 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 12:54:18 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/04 09:17:23 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 			Use ft_strtrim to remove the trailing newline (\n).
 */
 
-char	*get_texture(char *line, char *id)
+static char	*get_texture(char *line, char *id)
 {
 	int		i;
 	char	*path;
@@ -53,69 +53,78 @@ static int	check_missing_data(t_game *game)
 }
 
 /*
+	Auxiliar function:
+		check whether the line matches the ID
+		if it does, verify duplicates and save
+		‘dest’ is a pointer to the variable 
+		in the original struct (&game->variable)
+		By modifying ‘dest’, we modify the original variable
+*/
+
+static int	check_and_save(char *line, char *id, char **dest)
+{
+	if (ft_strncmp(line, id, ft_strlen(id)) == 0)
+	{
+		if (*dest)
+			return (printf("Error: Duplicate identifier %s\n", id), -1);
+		*dest = get_texture(line, id);
+		return (1);
+	}
+	return (0);
+}
+/*
+	Auxiliar function:
+		pass the line through all possible filters
+*/
+
+static int	scan_line(t_game *game, char *line)
+{
+	int	res;
+
+	res = check_and_save(line, "NO", &game->tex_north);
+	if (res != 0)
+		return (res);
+	res = check_and_save(line, "SO", &game->tex_south);
+	if (res != 0)
+		return (res);
+	res = check_and_save(line, "WE", &game->tex_west);
+	if (res != 0)
+		return (res);
+	res = check_and_save(line, "EA", &game->tex_east);
+	if (res != 0)
+		return (res);
+	res = check_and_save(line, "F", &game->color_floor);
+	if (res != 0)
+		return (res);
+	res = check_and_save(line, "C", &game->color_ceiling);
+	if (res != 0)
+		return (res);
+	return (0);
+}
+
+/*
 	Main function:
-		1. Check what each line is and store it.
-			Use ft_strncmp to see if it starts with NO, SO, etc.
-		2. If we find a 1, it means the map starts. Stop processing.
+		traverse the list and use scan_line to process each line
 */
 
 int	get_map_info(t_game *game)
 {
 	t_list	*tmp;
 	char	*line;
+	int		status;
 
 	tmp = game->map_list;
 	while (tmp)
 	{
 		line = (char *)tmp->content;
-		if (ft_strncmp(line, "NO", 2) == 0)
-		{
-			if (game->tex_north)
-				return (printf("Error: Duplicate texture NO\n"), 0);
-			game->tex_north = get_texture(line, "NO");
-		}
-		else if (ft_strncmp(line, "SO", 2) == 0)
-		{
-			if (game->tex_south)
-				return (printf("Error: Duplicate texture SO\n"), 0);
-			game->tex_south = get_texture(line, "SO");
-		}
-		else if (ft_strncmp(line, "WE", 2) == 0)
-		{
-			if (game->tex_west)
-				return (printf("Error: Duplicate texture WE\n"), 0);
-			game->tex_west = get_texture(line, "WE");
-		}
-		else if (ft_strncmp(line, "EA", 2) == 0)
-		{
-			if (game->tex_east)
-				return (printf("Error: Duplicate texture EA\n"), 0);
-			game->tex_east = get_texture(line, "EA");
-		}
-		else if (ft_strncmp(line, "F", 1) == 0)
-		{
-			if (game->color_floor)
-				return (printf("Error: Duplicate color F\n"), 0);
-			game->color_floor = get_texture(line, "F");
-		}
-		else if (ft_strncmp(line, "C", 1) == 0)
-		{
-			if (game->color_ceiling)
-				return (printf("Error: Duplicate color C\n"), 0);
-			game->color_ceiling = get_texture(line, "C");
-		}
-		else if (line[0] == '1' || line[0] == '0')
+		if (line[0] == '1' || line[0] == '0')
 			break ;
+		status = scan_line(game, line);
+		if (status == -1)
+			return (0);
 		tmp = tmp->next;
 	}
 	if (!check_missing_data(game))
 		return (0);
-	// DEBUG
-	printf("Norte: %s\n", game->tex_north);
-	printf("Sur:   %s\n", game->tex_south);
-	printf("Oeste: %s\n", game->tex_west);
-	printf("Este:  %s\n", game->tex_east);
-	printf("Suelo: %s\n", game->color_floor);
-	printf("Techo: %s\n", game->color_ceiling);
 	return (1);
 }
