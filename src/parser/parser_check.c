@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 13:42:13 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/04 09:59:19 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/04 11:43:39 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,37 @@ static int	is_player(char c)
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
 	return (0);
+}
+
+/*
+	Auxiliar function:
+		1. find where the map starts
+		2. if an empty line is found after the map has started, activate a flag
+		3. if more map is found while the flag is active, it is an error
+*/
+
+int	check_map_spaces(t_game *game)
+{
+	t_list	*tmp;
+	int		map_started;
+	int		space;
+
+	map_started = 0;
+	space = 0;
+	tmp = game->map_list;
+	while (tmp)
+	{
+		if (is_map_line((char *)tmp->content))
+		{
+			map_started = 1;
+			if (space)
+				return (printf("Error: Empty line inside map\n"), 0);
+		}
+		else if (map_started && is_empty_line((char *)tmp->content))
+			space = 1;
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 /*

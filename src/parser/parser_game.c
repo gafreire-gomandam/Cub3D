@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 18:47:27 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/04 09:48:47 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/04 11:38:09 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,15 @@ int	is_empty_line(char *line)
 
 /*
 	Auxiliar function:
-		1. if it is empty: free it and return success
-		2. if it has content: create a node and add it to the list
+		we even store empty lines
+		if a line is empty, we store either an empty string 
+		or a newline so it can be detected later	
 */
 
 static int	process_line(t_game *game, char *line)
 {
 	t_list	*new_node;
 
-	if (is_empty_line(line))
-		return (free(line), 1);
 	new_node = ft_lstnew(line);
 	if (!new_node)
 	{

@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/04 11:24:51 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/04 11:44:18 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static int	load_map_data(t_game *game)
 	if (!get_map_info(game))
 		return (0);
 	if (!verify_identifiers(game))
+		return (0);
+	if (!check_map_spaces(game))
 		return (0);
 	if (!create_map_matrix(game))
 		return (0);

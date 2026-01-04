@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:52:19 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 19:00:39 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/04 11:39:17 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,17 @@ typedef struct s_game
 int			check_map(char *map);
 // src/parser/parser_game
 int			parse_game(char *map, t_game *game);
+int			is_empty_line(char *line);
 // src/parser/parser_info
 int			get_map_info(t_game *game);
 
 // src/parser/parser_matrix
 int			create_map_matrix(t_game *game);
+int			is_map_line(char *line);
 
 // src/parser/parser_check
 int			validate_map_content(t_game *game);
+int			check_map_spaces(t_game *game);
 
 // src/parser/parser_flood
 int			check_map_closed(t_game *game);
