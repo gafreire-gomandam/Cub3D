@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/03 13:45:38 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 17:26:25 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 18:48:30 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,27 @@ static int	is_numeric(char *str)
 	}
 	return (1);
 }
-
 /*
 	Auxiliar function:
-		free split
+		validate that the 3 values in the RGB array are correct (0–255)	
 */
 
-static void	free_split(char **split)
+static int	validate_rgb_values(char **rgb)
 {
 	int	i;
+	int	num;
 
 	i = 0;
-	while (split[i])
+	while (rgb[i])
 	{
-		free(split[i]);
+		if (!is_numeric(rgb[i]))
+			return (printf("Error: Color contains non-numeric chars\n"), 0);
+		num = ft_atoi(rgb[i]);
+		if (num < 0 || num > 255)
+			return (printf("Error: Color value out of range (0-255)\n"), 0);
 		i++;
 	}
-	free(split);
+	return (1);
 }
 
 /*
@@ -61,14 +65,13 @@ static void	free_split(char **split)
 		verify: 3 numbers, between 0 and 255, digits only
 		1. split by commas
 		2. count that there are exactly 3 parts
-		3. validate each number
+		3. call auxiliar function validate_rgb_values
 */
 
 static int	check_color_format(char *color_str, char *type)
 {
 	char	**rgb;
 	int		i;
-	int		num;
 
 	rgb = ft_split(color_str, ',');
 	if (!rgb)
@@ -79,24 +82,13 @@ static int	check_color_format(char *color_str, char *type)
 	if (i != 3)
 	{
 		free_split(rgb);
-		return (printf("Error: Invalid color format for %s (Must be R,G,B)\n",
-				type), 0);
+		return (printf("Error: Invalid format for %s (Must be R,G,B)\n", type),
+			0);
 	}
-	i = 0;
-	while (rgb[i])
+	if (!validate_rgb_values(rgb))
 	{
-		if (!is_numeric(rgb[i]))
-		{
-			free_split(rgb);
-			return (printf("Error: Color contains non-numeric chars\n"), 0);
-		}
-		num = ft_atoi(rgb[i]);
-		if (num < 0 || num > 255)
-		{
-			free_split(rgb);
-			return (printf("Error: Color value out of range (0-255)\n"), 0);
-		}
-		i++;
+		free_split(rgb);
+		return (0);
 	}
 	free_split(rgb);
 	return (1);

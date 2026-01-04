@@ -6,65 +6,59 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 17:02:10 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/04 11:24:51 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
 
+/*
+	Auxiliar function:
+		1. extract textures
+		2. verify that they exist
+		3. create the map matrix
+		4. clean the list (no longer needed)
+		5. validate content and perform flood fill
+*/
+
+static int	load_map_data(t_game *game)
+{
+	if (!get_map_info(game))
+		return (0);
+	if (!verify_identifiers(game))
+		return (0);
+	if (!create_map_matrix(game))
+		return (0);
+	free_list(&game->map_list);
+	if (!validate_map_content(game))
+		return (0);
+	if (!check_map_closed(game))
+		return (0);
+	return (1);
+}
+/*
+	Main function:
+		1. check arguments.
+		2. check file.
+		3. initial reading (parse_game).
+		4. data processing (load_map_data)
+		5. start_game(&game)
+*/
+
 int	main(int argc, char *argv[])
 {
 	t_game	game;
-	int		y;
 
 	if (argc != 2)
-		printf("Error arguments\n");
-	else
-	{
-		if (check_map(argv[1]))
-		{
-			// create struct
-			init_game(&game);
-			if (parse_game(argv[1], &game))
-			{
-				// 1. extract textures
-				if (!get_map_info(&game))
-					return (free_resources(&game), 1);
-				// 2. verify identifiers
-				if (!verify_identifiers(&game))
-					return (free_resources(&game), 1);
-				// 3. extract map
-				if (!create_map_matrix(&game))
-					return (free_resources(&game), 1);
-				// 4. IMPORTANT! The list is no longer valid; convert it to a matrix
-				free_list(&game.map_list);
-				printf("Checking map contents...\n");
-				if (!validate_map_content(&game))
-					return (free_resources(&game), 1);
-				if (!check_map_closed(&game))
-					return (free_resources(&game), 1);
-				printf("¡Valid map! Player in (%d, %d) looking %c\n",
-					game.player_x, game.player_y, game.player_dir);
-				// (DEBUG)
-				y = 0;
-				printf("\n--- MAP IN ARRAY ---\n");
-				while (game.map[y])
-				{
-					printf("%s\n", game.map[y]);
-					y++;
-				}
-				// 5. at the end general cleanup
-				free_resources(&game);
-				return (0);
-			}
-			//  else
-			//  {
-			//     // free(struct);
-			//     return (-1);
-			//  }
-		}
-		else
-			return (printf("Exit\n"), -1);
-	}
+		return (printf("Error: Invalid arguments\n"), 1);
+	if (!check_map(argv[1]))
+		return (1);
+	init_game(&game);
+	if (!parse_game(argv[1], &game))
+		return (free_resources(&game), 1);
+	if (!load_map_data(&game))
+		return (free_resources(&game), 1);
+	printf("Map loaded successfully! Launching Game...\n");
+	free_resources(&game);
 	return (0);
 }

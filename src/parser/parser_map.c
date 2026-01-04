@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:54:10 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 13:56:19 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 17:48:28 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,23 +20,20 @@ static int	check_file(char *map)
 	if (len > 4)
 	{
 		if (ft_strncmp(map + (len - 4), ".cub", 4) != 0)
-			return (printf("File invalid\n"),
-				0);                                                      
-				// change function
+			return (printf("File invalid\n"), 0);
 	}
 	else
 		return (printf("Not valid map\n"), 0);
 	return (1);
 }
 
-static int	check_info(char *map) // change name function
+static int	check_info(char *map)
 {
-	int fd;
+	int	fd;
 
 	fd = open(map, O_RDONLY);
 	if (fd < 0)
 		return (0);
-
 	close(fd);
 	return (printf("Open file\n"), 1);
 }

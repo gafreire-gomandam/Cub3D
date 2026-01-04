@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:19:01 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 12:22:29 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 18:59:31 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static char	**duplicate_map(t_game *game)
 	char	**new_map;
 	int		i;
 
-	new_map = malloc(sizeof(char *) * (game->map_height + 1));
+	new_map = ft_calloc(game->map_height + 1, sizeof(char *));
 	if (!new_map)
 		return (NULL);
 	i = 0;
@@ -30,33 +30,10 @@ static char	**duplicate_map(t_game *game)
 	{
 		new_map[i] = ft_strdup(game->map[i]);
 		if (!new_map[i])
-		{
-			// Here you should free the previous data if it fails,
-			// but for simplicity we return NULL
-			return (NULL);
-		}
+			return (free_matrix(new_map), NULL);
 		i++;
 	}
-	new_map[i] = NULL;
 	return (new_map);
-}
-
-/*
-	Auxiliar function:
-		free the map copy
-*/
-
-static void	free_map_copy(char **map)
-{
-	int	i;
-
-	i = 0;
-	while (map[i])
-	{
-		free(map[i]);
-		i++;
-	}
-	free(map);
 }
 
 /*
@@ -109,7 +86,7 @@ int	check_map_closed(t_game *game)
 		return (printf("Error: Malloc failed in flood fill\n"), 0);
 	result = flood_fill(temp_map, game->player_x, game->player_y,
 			game->map_height);
-	free_map_copy(temp_map);
+	free_matrix(temp_map);
 	if (result == 0)
 		return (printf("Error: The map is not closed (there are leaks)\n"), 0);
 	return (1);

@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:52:19 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 16:53:11 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/03 19:00:39 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ int			verify_identifiers(t_game *game);
 void		init_game(t_game *game);
 
 void		free_list(t_list **list);
+void		free_split(char **split);
+void		free_matrix(char **matrix);
 int			free_resources(t_game *game);
 
 #endif
