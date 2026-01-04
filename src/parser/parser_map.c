@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/17 12:54:10 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 17:48:28 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/04 11:46:30 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	check_info(char *map)
 	if (fd < 0)
 		return (0);
 	close(fd);
-	return (printf("Open file\n"), 1);
+	return (1);
 }
 
 int	check_map(char *map)
