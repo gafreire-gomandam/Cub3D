@@ -1,7 +1,12 @@
 NAME = CUB3D
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra -I./include -I./libft
+LIB_DIR = ./libft
+MLX_DIR = ./minilibx-linux
+
+CFLAGS = -Wall -Werror -Wextra -I./include -I./libft -I$(MLX_DIR)
+
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 SRC = gnl/get_next_line_utils.c \
 	  gnl/get_next_line.c \
@@ -14,31 +19,37 @@ SRC = gnl/get_next_line_utils.c \
 	  src/parser/parser_check.c \
 	  src/parser/parser_flood.c \
 	  src/utils/free_game.c \
-	  src/parser/parser_verify.c
+	  src/parser/parser_verify.c \
+	  src/utils/utils_colors.c \
+      src/graphics/game_start.c \
+      src/graphics/game_hooks.c
 
 OBJ = $(SRC:.c=.o)
 
 RM = rm -f
 
-LIB_DIR = ./libft
 LIBFT = $(LIB_DIR)/libft.a
+MLX = $(MLX_DIR)/libmlx.a
 
-all: banner $(LIBFT) $(NAME)
+all: banner $(LIBFT) $(MLX) $(NAME)
 
 $(LIBFT):
 	@$(MAKE) -C $(LIB_DIR) >/dev/null 2>&1
 
-$(NAME): $(OBJ) $(LIBFT)
-	@$(CC) $(OBJ) $(LIBFT) -o $(NAME) >/dev/null 2>&1
+$(MLX):
+	@$(MAKE) -C $(MLX_DIR) >/dev/null 2>&1
+
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	@$(CC) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo "✅ $(NAME) linked successfully."
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "Compiling $<..."
 
 clean:
 	@$(RM) $(OBJ)
 	@$(MAKE) -C $(LIB_DIR) clean >/dev/null 2>&1
+	@$(MAKE) -C $(MLX_DIR) clean >/dev/null 2>&1
 	@echo "🧹 Object files removed."
 
 fclean: clean

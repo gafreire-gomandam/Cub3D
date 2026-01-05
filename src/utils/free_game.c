@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:54:06 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 19:00:22 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/05 20:58:48 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,21 @@ void	free_split(char **split)
 	}
 	free(split);
 }
+/*
+	Tool 4:
+		free mlx
+*/
+
+static void	free_graphics(t_game *game)
+{
+	if (game->gfx.win)
+		mlx_destroy_window(game->gfx.mlx, game->gfx.win);
+	if (game->gfx.mlx)
+	{
+		mlx_destroy_display(game->gfx.mlx);
+		free(game->gfx.mlx);
+	}
+}
 
 /*
 	Tool 4:
@@ -79,8 +94,9 @@ void	free_split(char **split)
 		1. free textures and colors
 		2. free matrix
 		3. free list
-		4. MLX cleanup will be done here later…
+		4. free mlx
 */
+
 int	free_resources(t_game *game)
 {
 	if (game->tex_north)
@@ -99,5 +115,6 @@ int	free_resources(t_game *game)
 		free_matrix(game->map);
 	if (game->map_list)
 		free_list(&game->map_list);
+	free_graphics(game);
 	return (1);
 }
