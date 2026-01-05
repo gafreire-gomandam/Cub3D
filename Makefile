@@ -37,16 +37,14 @@ $(LIBFT):
 	@$(MAKE) -C $(LIB_DIR) >/dev/null 2>&1
 
 $(MLX):
-	@echo "Compiling MiniLibX..."
 	@$(MAKE) -C $(MLX_DIR) >/dev/null 2>&1
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@$(CC) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME) >/dev/null 2>&1
+	@$(CC) $(OBJ) $(LIBFT) $(MLX_FLAGS) -o $(NAME)
 	@echo "✅ $(NAME) linked successfully."
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "Compiling $<..."
 
 clean:
 	@$(RM) $(OBJ)
