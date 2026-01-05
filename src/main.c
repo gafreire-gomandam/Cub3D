@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/04 11:44:18 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/05 18:43:19 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	load_map_data(t_game *game)
 		2. check file.
 		3. initial reading (parse_game).
 		4. data processing (load_map_data)
-		5. start_game(&game)
+		5. start game
 */
 
 int	main(int argc, char *argv[])
@@ -61,6 +61,7 @@ int	main(int argc, char *argv[])
 	if (!load_map_data(&game))
 		return (free_resources(&game), 1);
 	printf("Map loaded successfully! Launching Game...\n");
+	start_game(&game);
 	free_resources(&game);
 	return (0);
 }
