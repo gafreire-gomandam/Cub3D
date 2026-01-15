@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/15 17:05:10 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/15 21:00:27 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,15 @@ typedef struct s_gfx
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
 }					t_gfx;
+
+typedef struct s_img
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}					t_img;
 
 typedef struct s_game
 {
@@ -84,11 +93,10 @@ typedef struct s_raycast
 	int		hit;		// wall hit flag
 	int		side;		// wall side hit (0=NS, 1=EW)
 	double	perp_wall_dist;	// perpendicular distance to wall
-}					t_raycast
+}	t_raycast;
 
 // src/parser/parser_map
 int					check_map(char *map);
-// src/parser/parser_game
 int					parse_game(char *map, t_game *game);
 int					is_empty_line(char *line);
 // src/parser/parser_info
