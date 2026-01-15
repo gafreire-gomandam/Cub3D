@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/17 12:52:19 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/05 20:27:22 by gafreire         ###   ########.fr       */
+/*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
+/*   Updated: 2026/01/15 16:40:48 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,34 @@ typedef struct s_game
 
 	t_gfx			gfx;
 }					t_game;
+
+typedef struct s_player
+{
+	double	pos_x;	// Player X position in map grid
+	double	pos_y;	// Player Y position
+	double	dir_x;	// Direction vector X
+	double	dir_y;	// Direction vector Y
+	double	plane_x;	// Camera plane X (perpendicular to dir)
+	double	plane_y;	// Camera plane Y
+}	t_player;
+
+typedef struct s_raycast
+{
+	double	camera_x;	// x coordinate in camera space [-1, 1]
+	double	dir_x;		// ray direction x
+	double	dir_y;		// ray direction y
+	int	map_x;		// current map square x
+	int	map_y;		// current map square y
+	double	side_dist_x;	// distance to next x-side
+	double	side_dist_y;	// distance to next y-side
+	double	delta_dist_x;	// distance between x-side
+	double	delta_dist_y;	// distance between y-side
+	int	step_x;		// step direction x (-1 or 1)
+	int	step_y;		// steo direction y
+	int	hit;		// wall hit flag
+	int	side;		// wall side hit (0=NS, 1=EW)
+	double	perp_wall_dist;	// perpendicular distance to wall
+}	t_raycast
 
 // src/parser/parser_map
 int					check_map(char *map);
