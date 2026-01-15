@@ -6,8 +6,9 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:09 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/15 21:02:13 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/15 21:09:54 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// intialize ray and calculate distance 
 
