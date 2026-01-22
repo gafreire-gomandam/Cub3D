@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:09 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/22 03:11:39 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/22 04:51:27 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 void	init_ray_direction(t_game *game, t_raycast *ray, int x)
 {
 	ray->camera_x = 2.0 * x / (double)game->gfx.width - 1.0;
-	ray->dir_x
+	ray->dir_x = game->player.dir_x 
 	ray->dir_y
 	ray->map_x
 	ray->map_y

@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/20 21:53:53 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/22 04:59:26 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ typedef struct s_img
 	int		endian;		// Byte order color encoding
 }					t_img;
 
+typedef struct s_player
+{
+	double	pos_x;	// Player X position in map grid
+	double	pos_y;	// Player Y position
+	double	dir_x;	// Direction vector X
+	double	dir_y;	// Direction vector Y
+	double	plane_x;	// Camera plane X (perpendicular to dir)
+	double	plane_y;	// Camera plane Y
+}					t_player;
+
 typedef struct s_game
 {
 	t_list			*map_list;
@@ -64,19 +74,10 @@ typedef struct s_game
 	int				player_x;
 	int				player_y;
 	char			player_dir;
-
+	t_player		player;
+	t_img			img;
 	t_gfx			gfx;
 }					t_game;
-
-typedef struct s_player
-{
-	double	pos_x;	// Player X position in map grid
-	double	pos_y;	// Player Y position
-	double	dir_x;	// Direction vector X
-	double	dir_y;	// Direction vector Y
-	double	plane_x;	// Camera plane X (perpendicular to dir)
-	double	plane_y;	// Camera plane Y
-}					t_player;
 
 typedef struct s_raycast
 {
