@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/15 21:00:27 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/20 21:53:53 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,14 @@ typedef struct s_gfx
 	unsigned long	hex_ceiling;
 }					t_gfx;
 
+// write all pixels to memory. off screen buffer
 typedef struct s_img
 {
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_length;
-	int		endian;
+	void	*img;	// MLX image
+	char	*addr;	// Direct memory address of pixel data
+	int		bits_per_pixel; // Color depth 32-bits
+	int		line_length;	// Bytes per row
+	int		endian;		// Byte order color encoding
 }					t_img;
 
 typedef struct s_game
