@@ -6,11 +6,12 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:54:06 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/05 20:58:48 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/23 02:53:09 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
+#include "../../include/cubed.h"
 
 /*
 	Tool 1:
@@ -77,8 +78,11 @@ void	free_split(char **split)
 		free mlx
 */
 
+// added mlx image free
 static void	free_graphics(t_game *game)
 {
+	if (game->image.img)
+		mlx_destroy_image(game->gfx.mlx, game->image.img);
 	if (game->gfx.win)
 		mlx_destroy_window(game->gfx.mlx, game->gfx.win);
 	if (game->gfx.mlx)

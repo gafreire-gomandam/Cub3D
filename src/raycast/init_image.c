@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 02:03:48 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/23 02:43:20 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/23 03:09:58 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	init_image(t_game *game)
 void	put_pixel(t_img *image, int x, int y,)
 {
 	char	*pixel;
-	int	offset;
+	int		offset;
 
 	offset = y * image->line_length + x * (image->bits_per_pixel / 8);
 	pixel = img->addr + offset;
