@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/23 02:38:44 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/27 03:41:43 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ typedef struct s_game
 	int				player_y;
 	char			player_dir;
 	t_player		player;
-	t_img			image;
+	t_image			image;
 	t_gfx			gfx;
 }					t_game;
 
