@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 02:03:48 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/27 03:43:56 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/28 23:09:03 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void	init_image(t_game *game)
 }
 // update minilibx directory
 
-void	put_pixel(t_image *image, int x, int y,)
+void	put_pixel(t_image *image, int x, int y, int color)
 {
 	char	*pixel;
 	int		offset;
 
 	offset = y * image->line_length + x * (image->bits_per_pixel / 8);
-	pixel = img->addr + offset;
+	pixel = image->addr + offset;
 	*(unsigned int *)pixel = color;
 }

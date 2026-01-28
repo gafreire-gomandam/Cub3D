@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:27 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/22 06:19:38 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/28 23:06:54 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	step_ray(t_raycast *ray)
 {
 	if (ray->side_dist_x < ray->side_dist_y)
 	{
-		ray->side_dist_y += ray->delta_dist_x;
+		ray->side_dist_x += ray->delta_dist_x;
 		ray->map_x += ray->step_x;
 		ray->side = 0;
 	}

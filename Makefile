@@ -22,7 +22,14 @@ SRC = gnl/get_next_line_utils.c \
 	  src/parser/parser_verify.c \
 	  src/utils/utils_colors.c \
       src/graphics/game_start.c \
-      src/graphics/game_hooks.c
+      src/graphics/game_hooks.c \
+      src/raycast/init_player.c \
+      src/raycast/init_camera.c \
+      src/raycast/init_ray.c \
+      src/raycast/init_steps.c \
+      src/raycast/dda_step.c \
+      src/raycast/calc_wall_dist.c \
+      src/raycast/init_image.c 
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 02:47:56 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/23 03:08:51 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/28 23:02:43 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,12 @@ static void	init_step_y(t_game *game, t_raycast *ray)
 	if (ray->dir_y < 0)
 	{
 		ray->step_y = -1;
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player.pos_y)
+			* ray->delta_dist_y;
+	}
+	else
+	{
+		ray->step_y = 1;
 		ray->side_dist_y = (ray->map_y + 1.0 - game->player.pos_y)
 			* ray->delta_dist_y;
 	}

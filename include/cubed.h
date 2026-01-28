@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/27 03:41:43 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/28 23:19:35 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,32 @@ void				start_game(t_game *game);
 int					close_window(t_game *game);
 int					key_press(int keycode, t_game *game);
 
-// srcr/utils/utils_colors
+// src/utils/utils_colors
 int					init_colors(t_game *game);
+
+/*	RAYCASTING	*/
+// player initialization	
+void				init_player_position(t_game *game);
+void				init_player_direction(t_game *game);
+
+// camera plane
+void				init_camera_plane(t_game *game);
+
+// ray direction and distance
+void				init_ray_direction(t_game *game, t_raycast *ray, int x);
+void				init_delta_distance(t_raycast *ray);
+
+// step initialization
+void				init_step_and_side_distance(t_game *game, t_raycast *ray);
+
+// digital differential analysis algorithm
+void				perform_dda(t_game *game, t_raycast *ray);
+
+// walls
+void				calculate_wall_distance(t_game *game, t_raycast *ray);
+
+// image initialization
+void				init_image(t_game *game);
+void				put_pixel(t_image *image, int x, int y, int color);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:06:26 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/22 02:50:54 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/28 22:57:33 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	init_player_direction(t_game *game)
 		game->player.dir_x = 1.0;
 		game->player.dir_y = 0.0;
 	}
-	else if (game->player == 'W')
+	else if (game->player_dir == 'W')
 	{
 		game->player.dir_x = -1.0;
 		game->player.dir_y = 0.0;
