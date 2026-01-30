@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/28 23:19:35 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/01/30 01:40:42 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_raycast
 	double	delta_dist_x;	// distance between x-side
 	double	delta_dist_y;	// distance between y-side
 	int		step_x;		// step direction x (-1 or 1)
-	int		step_y;		// steo direction y
+	int		step_y;		// step direction y
 	int		hit;		// wall hit flag
 	int		side;		// wall side hit (0=NS, 1=EW)
 	double	perp_wall_dist;	// perpendicular distance to wall
@@ -156,10 +156,14 @@ void				init_step_and_side_distance(t_game *game, t_raycast *ray);
 void				perform_dda(t_game *game, t_raycast *ray);
 
 // walls
-void				calculate_wall_distance(t_game *game, t_raycast *ray);
+void				calc_wall_dist(t_game *game, t_raycast *ray);
 
 // image initialization
 void				init_image(t_game *game);
 void				put_pixel(t_image *image, int x, int y, int color);
+
+// ****************** DEBUGGING ******************
+void	test_raycast_sweep(t_game *game);
+void	test_single_ray(t_game *game, int screen_x);
 
 #endif

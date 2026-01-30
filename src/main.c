@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/05 18:43:19 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/01/30 00:57:43 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ static int	load_map_data(t_game *game)
 		4. data processing (load_map_data)
 		5. start game
 */
+
+/* DEBUGGING: test from copilot at graphics/game_start.c */
+
 
 int	main(int argc, char *argv[])
 {
