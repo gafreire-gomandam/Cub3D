@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:40:21 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/02 11:30:25 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/02 14:21:29 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,22 @@ void	start_game(t_game *game)
 {
 	init_colors(game);
 	init_mlx(game);
-	init_colors(game);
+	create_game_window(game);
+	
+	// init_image(game);
+	
 	init_player_position(game);
 	init_player_direction(game);
 	init_camera_plane(game);
+	
 	test_single_ray(game, game->gfx.width / 2);
 	test_raycast_sweep(game);
+	
 	mlx_hook(game->gfx.win, ON_KEYDOWN, 1L << 0, key_press, game);
 	mlx_hook(game->gfx.win, ON_DESTROY, 0, close_window, game);
+	
+	// mlx_loop_hook(game->gfx.mlx, game_loop, game);
+	
 	printf("🎨 Window opened! Press ESC to close.\n");
 	mlx_loop(game->gfx.mlx);
 }
