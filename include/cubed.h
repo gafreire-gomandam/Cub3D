@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cubed.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/30 01:40:42 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/02 10:42:41 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void				init_image(t_game *game);
 void				put_pixel(t_image *image, int x, int y, int color);
 
 // ****************** DEBUGGING ******************
-void	test_raycast_sweep(t_game *game);
-void	test_single_ray(t_game *game, int screen_x);
+void				test_raycast_sweep(t_game *game);
+void				test_single_ray(t_game *game, int screen_x);
 
 #endif
