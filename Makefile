@@ -1,4 +1,4 @@
-NAME = CUB3D
+NAME = Cub3D
 CC = cc
 
 LIB_DIR = ./libft
@@ -23,6 +23,9 @@ SRC = gnl/get_next_line_utils.c \
       src/utils/utils_colors.c \
       src/graphics/game_start.c \
       src/graphics/game_hooks.c \
+      src/graphics/textures.c \
+      src/graphics/player_movement.c \
+      src/graphics/render.c \
       src/raycast/init_player.c \
       src/raycast/init_camera.c \
       src/raycast/init_ray.c \

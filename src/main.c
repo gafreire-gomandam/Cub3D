@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/02 10:43:37 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:16:42 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,13 @@ static int	load_map_data(t_game *game)
 		5. start game
 */
 
-/* DEBUGGING: test from copilot at graphics/game_start.c */
-
-int	main(int argc, char *argv[])
+// revisar segfault
+int	main(int argc, char **argv)
 {
 	t_game	game;
 
 	if (argc != 2)
-		return (printf("Error: Invalid arguments\n"), 1);
+		return (printf("Error\nUsage: ./CUB3D <path_to_map.cub>\n"), 1);
 	if (!check_map(argv[1]))
 		return (1);
 	init_game(&game);
@@ -62,7 +61,6 @@ int	main(int argc, char *argv[])
 		return (free_resources(&game), 1);
 	if (!load_map_data(&game))
 		return (free_resources(&game), 1);
-	printf("Map loaded successfully! Launching Game...\n");
 	start_game(&game);
 	free_resources(&game);
 	return (0);

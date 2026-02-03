@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:54:06 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/23 02:53:09 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/03 12:50:38 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,14 +73,23 @@ void	free_split(char **split)
 	}
 	free(split);
 }
+
 /*
 	Tool 4:
 		free mlx
 */
 
-// added mlx image free
 static void	free_graphics(t_game *game)
 {
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		if (game->textures[i].img)
+			mlx_destroy_image(game->gfx.mlx, game->textures[i].img);
+		i++;
+	}
 	if (game->image.img)
 		mlx_destroy_image(game->gfx.mlx, game->image.img);
 	if (game->gfx.win)

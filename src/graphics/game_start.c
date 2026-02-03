@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:40:21 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/02 14:21:29 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/03 13:45:27 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 	Auxiliar function:
 		Initialize the connection with X11
 */
-
 static void	init_mlx(t_game *game)
 {
 	game->gfx.mlx = mlx_init();
@@ -27,15 +26,15 @@ static void	init_mlx(t_game *game)
 		exit(1);
 	}
 }
+
 /*
 	Auxiliar function:
 		Create the graphics window
 */
-
 static void	create_game_window(t_game *game)
 {
 	game->gfx.win = mlx_new_window(game->gfx.mlx, game->gfx.width,
-			game->gfx.height, "Cub3D - The Beginning");
+			game->gfx.height, "Cub3D");
 	if (!game->gfx.win)
 	{
 		printf("Error: MLX window failed\n");
@@ -43,37 +42,29 @@ static void	create_game_window(t_game *game)
 		exit(1);
 	}
 }
+
 /*
 	Main function:
-		1. init colors
-		2. init mlx and window
-		3. create hooks
-		4.start loop
-
+	1. init colors
+	2. init mlx and window
+	3. init player and camera
+	4. create graphics
+	5. raycasting setup
+	6. init render
+	7.start hooks and Loop
 */
-
-/* DEBUGGING: graphics/game_start.c */
 void	start_game(t_game *game)
 {
 	init_colors(game);
 	init_mlx(game);
 	create_game_window(game);
-	
-	// init_image(game);
-	
 	init_player_position(game);
 	init_player_direction(game);
 	init_camera_plane(game);
-	
-	test_single_ray(game, game->gfx.width / 2);
-	test_raycast_sweep(game);
-	
+	init_textures(game);
+	init_image(game);
+	render_frame(game);
 	mlx_hook(game->gfx.win, ON_KEYDOWN, 1L << 0, key_press, game);
 	mlx_hook(game->gfx.win, ON_DESTROY, 0, close_window, game);
-	
-	// mlx_loop_hook(game->gfx.mlx, game_loop, game);
-	
-	printf("🎨 Window opened! Press ESC to close.\n");
 	mlx_loop(game->gfx.mlx);
 }
-// DEBUG: print to check: player position, direction and plane

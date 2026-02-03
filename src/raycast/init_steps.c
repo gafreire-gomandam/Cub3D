@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_steps.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 02:47:56 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/30 00:47:30 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/02 18:31:17 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	init_step_y(t_game *game, t_raycast *ray)
 	else
 	{
 		ray->step_y = 1;
-		ray->side_dist_y = (game->player.pos_y - game->player.pos_y)
+		ray->side_dist_y = (ray->map_y + 1.0 - game->player.pos_y)
 			* ray->delta_dist_y;
 	}
 }
