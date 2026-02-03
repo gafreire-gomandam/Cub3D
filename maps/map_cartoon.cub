@@ -1,7 +1,7 @@
-NO ./textures/north_wall.xpm
-SO ./textures/south_wall.xpm
-WE ./textures/west_wall.xpm
-EA ./textures/east_wall.xpm
+NO ./textures/cartoon/north_wall.xpm
+SO ./textures/cartoon/east_wall.xpm
+WE ./textures/cartoon/west_wall.xpm
+EA ./textures/cartoon/east_wall.xpm
 
 F 28,86,49
 C 135,206,235
