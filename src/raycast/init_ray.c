@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:09 by gomandam          #+#    #+#             */
-/*   Updated: 2026/01/28 23:22:17 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/04 17:51:31 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	init_ray_direction(t_game *game, t_raycast *ray, int x)
 	ray->map_y = (int)game->player.pos_y;
 	ray->hit = 0;
 }
+// calculate ray direction for screen column x. interpolation of camera plane edges
 // scalar value camera_x axis rays casted horizontally across the screen L to R
+// screen pixel x to camera space 
 
 void	init_delta_distance(t_raycast *ray)
 {
