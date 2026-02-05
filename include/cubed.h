@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/04 18:18:50 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/05 16:37:04 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@
 # define TEX_E 2
 # define TEX_W 3
 
-typedef struct s_texture {
-	void    *img;
-	char    *addr;
-	int     width;
-	int     height;
-	int     bits_per_pixel;
-	int     line_length;
-	int     endian;
-} 			t_texture;
+typedef struct s_texture
+{
+	void			*img;
+	char			*addr;
+	int				width;
+	int				height;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
+}					t_texture;
 
 typedef struct s_gfx
 {
@@ -60,24 +61,23 @@ typedef struct s_gfx
 	unsigned long	hex_ceiling;
 }					t_gfx;
 
-// write all pixels to memory. off screen buffer
 typedef struct s_image
 {
-	void	*img;	// MLX image
-	char	*addr;	// Direct memory address of pixel data
-	int		bits_per_pixel; // Color depth 32-bits
-	int		line_length;	// Bytes per row
-	int		endian;		// Byte order color encoding
+	void			*img;
+	char			*addr;
+	int				bits_per_pixel;
+	int				line_length;
+	int				endian;
 }					t_image;
 
 typedef struct s_player
 {
-	double	pos_x;	// Player X position in map grid
-	double	pos_y;	// Player Y position
-	double	dir_x;	// Direction vector X
-	double	dir_y;	// Direction vector Y
-	double	plane_x;	// Camera plane X (perpendicular to dir)
-	double	plane_y;	// Camera plane Y
+	double			pos_x;
+	double			pos_y;
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
 }					t_player;
 
 typedef struct s_game
@@ -105,185 +105,104 @@ typedef struct s_game
 
 typedef struct s_raycast
 {
-	double	camera_x;	// x coordinate in camera space [-1, 1]
-	double	dir_x;		// ray direction x
-	double	dir_y;		// ray direction y
-	int		map_x;		// current map square x
-	int		map_y;		// current map square y
-	double	side_dist_x;	// distance to next x-side
-	double	side_dist_y;	// distance to next y-side
-	double	delta_dist_x;	// distance between x-side
-	double	delta_dist_y;	// distance between y-side
-	int		step_x;		// step direction x (-1 or 1)
-	int		step_y;		// step direction y
-	int		hit;		// wall hit flag
-	int		side;		// wall side hit (0=NS, 1=EW)
-	double	perp_wall_dist;	// perpendicular distance to wall
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	int		tex_num;
-	double	wall_x;
-	int		tex_x;
-}	t_raycast;
+	double			camera_x;
+	double			dir_x;
+	double			dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	double			perp_wall_dist;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	int				tex_num;
+	double			wall_x;
+	int				tex_x;
+}					t_raycast;
 
-// src/parser/parser_map
-/*int					check_map(char *map);
+// src/parser/parser_game.c
 int					parse_game(char *map, t_game *game);
 int					is_empty_line(char *line);
-// src/parser/parser_info
+
+// src/parser/parser_map.c
+int					check_map(char *map);
+
+// src/parser/parser_info.c
 int					get_map_info(t_game *game);
 
-// src/parser/parser_matrix
+// src/parser/parser_verify.c
+int					verify_identifiers(t_game *game);
+
+// src/parser/parser_check.c
+int					check_map_spaces(t_game *game);
+int					validate_map_content(t_game *game);
+
+// src/parser/parser_matrix.c
 int					create_map_matrix(t_game *game);
 int					is_map_line(char *line);
 
-// src/parser/parser_check
-int					validate_map_content(t_game *game);
-int					check_map_spaces(t_game *game);
-
-// src/parser/parser_flood
+// src/parser/parser_flood.c
 int					check_map_closed(t_game *game);
 
-// src/parser/parser_verify
-int					verify_identifiers(t_game *game);
-
-// src/init
+// src/init/init_game.c
 void				init_game(t_game *game);
 
-// src/utils/free_game
+// src/utils/free_game.c
 void				free_list(t_list **list);
 void				free_split(char **split);
 void				free_matrix(char **matrix);
 int					free_resources(t_game *game);
 
-// src/graphics/game_start
+// src/utils/utils_colors.c
+int					init_colors(t_game *game);
+
+// src/graphics/game_start.c
 void				start_game(t_game *game);
 
-// src/graphics/game_hooks
+// src/graphics/game_hooks.c
 int					close_window(t_game *game);
 int					key_press(int keycode, t_game *game);
 
-// src/utils/utils_colors
-int					init_colors(t_game *game);
+// src/graphics/render.c
+void				render_frame(t_game *game);
 
-// RAYCASTING	
-// player initialization	
+// src/graphics/textures.c
+void				init_textures(t_game *game);
+int					get_texture_color(t_texture *tex, int x, int y);
+
+// src/graphics/player_movement.c
+void				move_player(t_game *game, double move_x, double move_y);
+void				rotate_player(t_game *game, double rotspeed);
+
+// src/raycast/init_player.c
 void				init_player_position(t_game *game);
 void				init_player_direction(t_game *game);
 
-// camera plane
+// src/raycast/init_camera.c
 void				init_camera_plane(t_game *game);
 
-// ray direction and distance
+// src/raycast/init_ray.c
 void				init_ray_direction(t_game *game, t_raycast *ray, int x);
 void				init_delta_distance(t_raycast *ray);
 
-// step initialization
+// src/raycast/init_steps.c
 void				init_step_and_side_distance(t_game *game, t_raycast *ray);
 
-// digital differential analysis algorithm
+// src/raycast/dda_step.c
 void				perform_dda(t_game *game, t_raycast *ray);
 
-// walls
+// src/raycast/calc_wall_dist.c
 void				calc_wall_dist(t_game *game, t_raycast *ray);
 
-// image initialization
+// src/raycast/init_image.c
 void				init_image(t_game *game);
 void				put_pixel(t_image *image, int x, int y, int color);
-
-// ****************** DEBUGGING ******************
-void				test_raycast_sweep(t_game *game);
-void				test_single_ray(t_game *game, int screen_x);
-*/
-
-/* --- PARSING (Lectura y Validación del Mapa) --- */
-// src/parser/parser_game.c
-int     parse_game(char *map, t_game *game);
-int     is_empty_line(char *line);
-
-// src/parser/parser_map.c
-int     check_map(char *map);
-
-// src/parser/parser_info.c
-int     get_map_info(t_game *game);
-
-// src/parser/parser_verify.c
-int     verify_identifiers(t_game *game);
-
-// src/parser/parser_check.c
-int     check_map_spaces(t_game *game);
-int     validate_map_content(t_game *game);
-
-// src/parser/parser_matrix.c
-int     create_map_matrix(t_game *game);
-int     is_map_line(char *line);
-
-// src/parser/parser_flood.c
-int     check_map_closed(t_game *game);
-
-/* --- INICIALIZACIÓN Y MEMORIA --- */
-// src/init/init_game.c
-void    init_game(t_game *game);
-
-// src/utils/free_game.c
-void    free_list(t_list **list);
-void    free_split(char **split);
-void    free_matrix(char **matrix);
-int     free_resources(t_game *game);
-
-// src/utils/utils_colors.c
-int     init_colors(t_game *game);
-
-/* --- GRÁFICOS Y EVENTOS (Core) --- */
-// src/graphics/game_start.c
-void    start_game(t_game *game);
-
-// src/graphics/game_hooks.c
-int     close_window(t_game *game);
-int     key_press(int keycode, t_game *game);
-
-// src/graphics/render.c (NUEVO v2.0.0)
-void    render_frame(t_game *game);
-
-/* --- TEXTURAS (NUEVO v2.0.0) --- */
-// src/graphics/textures.c
-void    init_textures(t_game *game);
-int     get_texture_color(t_texture *tex, int x, int y);
-
-/* --- MOVIMIENTO (NUEVO v2.0.0) --- */
-// src/graphics/player_movement.c
-void    move_player(t_game *game, double move_x, double move_y);
-void    rotate_player(t_game *game, double rotspeed);
-
-/* --- RAYCASTING (Motor Matemático) --- */
-// src/raycast/init_player.c
-void    init_player_position(t_game *game);
-void    init_player_direction(t_game *game);
-
-// src/raycast/init_camera.c
-void    init_camera_plane(t_game *game);
-
-// src/raycast/init_ray.c
-void    init_ray_direction(t_game *game, t_raycast *ray, int x);
-void    init_delta_distance(t_raycast *ray);
-
-// src/raycast/init_steps.c
-void    init_step_and_side_distance(t_game *game, t_raycast *ray);
-
-// src/raycast/dda_step.c
-void    perform_dda(t_game *game, t_raycast *ray);
-
-// src/raycast/calc_wall_dist.c
-void    calc_wall_dist(t_game *game, t_raycast *ray);
-
-/* --- IMAGEN Y PIXELES --- */
-// src/raycast/init_image.c
-void    init_image(t_game *game);
-void    put_pixel(t_image *image, int x, int y, int color);
-
-/* --- DEBUGGING (Opcional, si mantienes DEBUG.c) --- */
-void    test_raycast_sweep(t_game *game);
-void    test_single_ray(t_game *game, int screen_x);
 
 #endif
