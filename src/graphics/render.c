@@ -6,11 +6,18 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 17:41:34 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/04 18:16:47 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:41:19 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
+
+/*
+	Auxiliary function:
+		1. Loop through every pixel on screen
+		2. Top half gets ceiling color
+		3. Bottom half gets floor color
+*/
 
 static void	draw_floor_ceiling(t_game *game)
 {
@@ -33,6 +40,13 @@ static void	draw_floor_ceiling(t_game *game)
 	}
 }
 
+/*
+	Auxiliary function:
+		1. Calculate wall line height based on distance
+		2. Calculate where to start drawing (centered, clamped to screen)
+		3. Calculate where to stop drawing (clamped to screen)
+*/
+
 static void	calculate_height(t_game *game, t_raycast *ray)
 {
 	ray->line_height = (int)(game->gfx.height / ray->perp_wall_dist);
@@ -43,6 +57,14 @@ static void	calculate_height(t_game *game, t_raycast *ray)
 	if (ray->draw_end >= game->gfx.height)
 		ray->draw_end = game->gfx.height - 1;
 }
+
+/*
+	Auxiliary function:
+		1. Select texture based on wall side and ray direction
+		2. Calculate exact hit position on wall (wall_x)
+		3. Convert wall_x to texture X coordinate
+		4. Flip texture X if needed for correct orientation
+*/
 
 static void	calculate_tex_x(t_game *game, t_raycast *ray)
 {
@@ -70,6 +92,14 @@ static void	calculate_tex_x(t_game *game, t_raycast *ray)
 		ray->tex_x = game->textures[ray->tex_num].width - ray->tex_x - 1;
 }
 
+/*
+	Auxiliary function:
+		1. Calculate vertical step through texture
+		2. Calculate starting texture position
+		3. Draw textured vertical line pixel by pixel
+		4. Use modulo for texture Y wrapping and handle negatives
+*/
+
 static void	draw_stripe(t_game *game, t_raycast *ray, int x)
 {
 	t_texture	*tex;
@@ -94,6 +124,15 @@ static void	draw_stripe(t_game *game, t_raycast *ray, int x)
 		y++;
 	}
 }
+
+/*
+	Main function:
+		1. Draw floor and ceiling as background
+		2. For each screen column, cast a ray
+		3. Find wall, calculate distance and height
+		4. Calculate texture coordinates and draw stripe
+		5. Display complete frame to window
+*/
 
 void	render_frame(t_game *game)
 {
