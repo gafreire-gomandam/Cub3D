@@ -1,4 +1,4 @@
-NAME = CUB3D
+NAME = Cub3D
 CC = cc
 
 LIB_DIR = ./libft
@@ -9,20 +9,31 @@ CFLAGS = -Wall -Werror -Wextra -I./include -I./libft -I$(MLX_DIR)
 MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 SRC = gnl/get_next_line_utils.c \
-	  gnl/get_next_line.c \
-	  src/main.c \
+      gnl/get_next_line.c \
+      src/main.c \
       src/parser/parser_map.c \
       src/parser/parser_game.c \
-	  src/parser/parser_info.c \
-	  src/init/init_game.c \
-	  src/parser/parser_matrix.c \
-	  src/parser/parser_check.c \
-	  src/parser/parser_flood.c \
-	  src/utils/free_game.c \
-	  src/parser/parser_verify.c \
-	  src/utils/utils_colors.c \
+      src/parser/parser_info.c \
+      src/init/init_game.c \
+      src/parser/parser_matrix.c \
+      src/parser/parser_check.c \
+      src/parser/parser_flood.c \
+      src/utils/free_game.c \
+      src/parser/parser_verify.c \
+      src/utils/utils_colors.c \
       src/graphics/game_start.c \
-      src/graphics/game_hooks.c
+      src/graphics/game_hooks.c \
+      src/graphics/textures.c \
+      src/graphics/player_movement.c \
+      src/graphics/render.c \
+      src/raycast/init_player.c \
+      src/raycast/init_camera.c \
+      src/raycast/init_ray.c \
+      src/raycast/init_steps.c \
+      src/raycast/dda_step.c \
+      src/raycast/calc_wall_dist.c \
+      src/raycast/init_image.c \
+      src/graphics/DEBUG.c
 
 OBJ = $(SRC:.c=.o)
 
