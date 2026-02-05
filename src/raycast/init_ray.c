@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:09 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/05 20:29:38 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/05 21:31:02 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,3 +47,51 @@ void	init_delta_distance(t_raycast *ray)
 // calculate x-axis delta distance; distance to travel 1 grid cell horizontally
 // then do it again for Y-axis
 // usage: for DDA algorithm to efficiently step through grid
+/*
+When deriving deltaDistX geometrically you get, with Pythagoras, the formulas below. For the blue triangle (deltaDistX), one side has length 1 (as it is exactly one cell) and the other has length raydirY / raydirX because it is exaclty the amount of units the ray goes in the y-direction when taking 1 step in the X-direction. For the green triangle (deltaDistY), the formula is similar.
+
+deltaDistX = sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX))
+deltaDistY = sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY))
+
+But this can be simplified to:
+
+deltaDistX = abs(|rayDir| / rayDirX)
+deltaDistY = abs(|rayDir| / rayDirY)
+
+Where |rayDir| is the length of the vector rayDirX, rayDirY (that is sqrt(rayDirX * rayDirX + rayDirY * rayDirY)): you can indeed verify that e.g. sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX)) equals abs(sqrt(rayDirX * rayDirX + rayDirY * rayDirY) / rayDirX). However, we can use 1 instead of |rayDir|, because only the *ratio* between deltaDistX and deltaDistY matters for the DDA code that follows later below, so we get:
+
+deltaDistX = abs(1 / rayDirX)
+deltaDistY = abs(1 / rayDirY)
+
+Due to this, the deltaDist and sideDist values used in the code do not match the lengths shown in the picture above, but their relative sizes all still match. 
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
