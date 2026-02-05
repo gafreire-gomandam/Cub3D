@@ -6,14 +6,12 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 02:47:56 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/03 16:20:21 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/05 23:03:29 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
 
-// For static void fx we can simply include the variables inside the function
-// 	instead of making it as arguments. But just in case we need more lines
 static void	init_step_x(t_game *game, t_raycast *ray)
 {
 	if (ray->dir_x < 0)
@@ -29,6 +27,11 @@ static void	init_step_x(t_game *game, t_raycast *ray)
 			* ray->delta_dist_x;
 	}
 }
+// determines grid traversal direction, initial distance to next vertical grid
+// check ray determine if ray travels left (-1) and set step direction
+// distance to left edge: player to left cell boundary * cost per unit
+// else: travels to right (+), grid +1 per cell, fractional distance right edge
+// usage: DDA init computes distance to first grid crossing
 
 static void	init_step_y(t_game *game, t_raycast *ray)
 {
@@ -45,9 +48,13 @@ static void	init_step_y(t_game *game, t_raycast *ray)
 			* ray->delta_dist_y;
 	}
 }
+// grid traversal direction, and initial distance to next horizontal line y-axis
 
 void	init_step_and_side_distance(t_game *game, t_raycast *ray)
 {
 	init_step_x(game, ray);
 	init_step_y(game, ray);
 }
+// called from render_frame(); during raycasting loop
+// coordinates X,Y initialization in one call
+// usage: called once per ray after init_delta_distance(), before perform_dda()
