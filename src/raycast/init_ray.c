@@ -6,11 +6,9 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:09 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/04 17:51:31 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/05 15:47:08 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// intialize ray and calculate distance 
 
 #include "../../include/cubed.h"
 
@@ -23,9 +21,12 @@ void	init_ray_direction(t_game *game, t_raycast *ray, int x)
 	ray->map_y = (int)game->player.pos_y;
 	ray->hit = 0;
 }
-// calculate ray direction for screen column x. interpolation of camera plane edges
+// intialize ray and calculate distance 
+// calculate ray direction for screen column x. interpolation camera plane edges
 // scalar value camera_x axis rays casted horizontally across the screen L to R
 // screen pixel x to camera space 
+// compute ray direction by adding scaled plane vector to direction
+// initialize ray start (player's current position), & then reset wall hit flag
 
 void	init_delta_distance(t_raycast *ray)
 {
@@ -38,4 +39,7 @@ void	init_delta_distance(t_raycast *ray)
 	else
 		ray->delta_dist_y = fabs(1.0 / ray->dir_y);
 }
+// calculates distance ray travels between grid lines (X,Y) axes
+// 
 // fabs() - single (f)double argument with absolute value
+// 
