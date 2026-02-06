@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 01:45:26 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/04 04:51:46 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/06 01:22:00 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ void	init_camera_plane(t_game *game)
 }
 
 // constructs camera plane perpendicular to player direction FOV
-// copy direction vector to plane vector -> player.plane (x,y) to player.dir_ (x,y)
+// copy direction vector to plane vector== player.plane (x,y) to plyr.dir_ (x,y)
 // rotate plane 90 deg. to make it perpendicular
 // scale plane to 0.66 FOV == larger->fisheye, smaller->narrow tunnel vision
 // usage: setups camera raycasting. plane width determines FOV
 /*
 	direction: forward view where player faces
-	plane: perpendicular to direction (screen Left-Right) enables side ray sweep
+	plane: perpendicular to dir. (screen Left-Right) enables side ray sweep
 	0.66 controls viewing angle
 */

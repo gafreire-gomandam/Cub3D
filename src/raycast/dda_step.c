@@ -6,7 +6,7 @@
 /*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:27 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/04 04:27:09 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/06 01:20:50 by gomandam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	step_ray(t_raycast *ray)
 }
 
 // advance ray one cell, x or y dir. called repeatedly until wall hits
-// if (ray->side_dist_x < ray->side_dist_y) -> check if x-side is closer than y-side
+// if (ray->side_dist_x < ray->side_dist_y) -> check if x-side closer than y-
 // advance to x-side, move to next cell/grid, mark hit as vertical side = 0
 // else () step in y-dir, mark horizontal side = 1
 
