@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 20:19:01 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/03 18:59:31 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/06 10:47:08 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ int	check_map_closed(t_game *game)
 			game->map_height);
 	free_matrix(temp_map);
 	if (result == 0)
-		return (printf("Error: The map is not closed (there are leaks)\n"), 0);
+		return (printf("Error: The map is not closed \n"), 0);
 	return (1);
 }
