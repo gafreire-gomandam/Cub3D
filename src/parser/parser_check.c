@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/02 13:42:13 by gafreire          #+#    #+#             */
-/*   Updated: 2026/01/04 11:43:39 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:05:08 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,44 +28,55 @@ static int	is_valid_char(char c)
 
 /*
 	Auxiliary function:
-	check if the character is a player
+		Checks if the line is a valid configuration identifier (NO, SO, etc.)
 */
 
-static int	is_player(char c)
+static int	is_identifier_line(char *line)
 {
-	if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	while (*line == ' ')
+		line++;
+	if (!ft_strncmp(line, "NO", 2) || !ft_strncmp(line, "SO", 2))
+		return (1);
+	if (!ft_strncmp(line, "WE", 2) || !ft_strncmp(line, "EA", 2))
+		return (1);
+	if (!ft_strncmp(line, "F", 1) || !ft_strncmp(line, "C", 1))
 		return (1);
 	return (0);
 }
 
 /*
-	Auxiliar function:
+	Main function:
 		1. find where the map starts
 		2. if an empty line is found after the map has started, activate a flag
 		3. if more map is found while the flag is active, it is an error
+		State[0] = map_started, State[1] = space_found (empty line inside map)
 */
 
 int	check_map_spaces(t_game *game)
 {
 	t_list	*tmp;
-	int		map_started;
-	int		space;
+	int		state[2];
 
-	map_started = 0;
-	space = 0;
+	state[0] = 0;
+	state[1] = 0;
 	tmp = game->map_list;
 	while (tmp)
 	{
-		if (is_map_line((char *)tmp->content))
-		{
-			map_started = 1;
-			if (space)
-				return (printf("Error: Empty line inside map\n"), 0);
-		}
-		else if (map_started && is_empty_line((char *)tmp->content))
-			space = 1;
+		if (is_map_line(tmp->content) && state[1])
+			return (printf("Error: Empty line inside map\n"), 0);
+		if (is_map_line(tmp->content))
+			state[0] = 1;
+		else if (state[0] && !is_empty_line(tmp->content))
+			return (printf("Error: Content found after map\n"), 0);
+		else if (state[0])
+			state[1] = 1;
+		else if (!is_empty_line(tmp->content)
+			&& !is_identifier_line(tmp->content))
+			return (printf("Error: Invalid line: %s", (char *)tmp->content), 0);
 		tmp = tmp->next;
 	}
+	if (!state[0])
+		return (printf("Error: No map found\n"), 0);
 	return (1);
 }
 
@@ -87,7 +98,7 @@ static int	scan_row(t_game *game, int y, int *players_count)
 		c = game->map[y][x];
 		if (!is_valid_char(c))
 			return (printf("Error: Invalid character '%c' in map\n", c), 0);
-		if (is_player(c))
+		if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		{
 			(*players_count)++;
 			game->player_x = x;
@@ -104,7 +115,7 @@ static int	scan_row(t_game *game, int y, int *players_count)
 		1. check valid characters
 		2. check player
 			- save the postion to use later
-	3. final check
+		3. final check
 */
 
 int	validate_map_content(t_game *game)

@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/30 18:41:17 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/03 19:05:09 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:14:30 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ static void	init_parser_vars(t_game *game)
 	game->player_dir = 0;
 }
 
-
 /*
 	Auxiliar function:
 		Initialize the texture array to NULL.
@@ -82,4 +81,10 @@ void	init_game(t_game *game)
 	game->image.img = NULL;
 	game->image.addr = NULL;
 	init_textures_struct(game);
+	game->key_w = 0;
+	game->key_s = 0;
+	game->key_a = 0;
+	game->key_d = 0;
+	game->key_left = 0;
+	game->key_right = 0;
 }

@@ -1,4 +1,4 @@
-NAME = Cub3D
+NAME = cub3D
 CC = cc
 
 LIB_DIR = ./libft
@@ -32,8 +32,7 @@ SRC = gnl/get_next_line_utils.c \
       src/raycast/init_steps.c \
       src/raycast/dda_step.c \
       src/raycast/calc_wall_dist.c \
-      src/raycast/init_image.c \
-      src/graphics/DEBUG.c
+      src/raycast/init_image.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,11 +6,18 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 18:42:18 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/03 16:03:16 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/05 17:09:54 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
+
+/*
+	Auxiliary function:
+		1. Apply 2D rotation matrix to direction vector
+		2. Apply same rotation to camera plane vector
+		3. Both vectors rotate by rotspeed (in radians)
+*/
 
 void	rotate_player(t_game *game, double rotspeed)
 {
@@ -28,6 +35,13 @@ void	rotate_player(t_game *game, double rotspeed)
 	game->player.plane_y = old_plane_x * sin(rotspeed) + game->player.plane_y
 		* cos(rotspeed);
 }
+
+/*
+	Auxiliary function:
+		1. Check X movement independently for collision
+		2. Check Y movement independently for collision
+		3. Update position only if not hitting a wall
+*/
 
 void	move_player(t_game *game, double move_x, double move_y)
 {
