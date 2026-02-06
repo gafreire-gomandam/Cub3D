@@ -49,6 +49,6 @@ void	put_pixel(t_image *image, int x, int y, int color)
 // y * line_length == row offset in bytes
 /* x * (bits_per_pixel / 8) == column offset in bytes 
 		(4 bytes per pixel 32-bit color) */
-// get pointer to  target pixel memory
+// get pointer to target pixel memory
 // write color value unsigned int (ARGB format)
 // used for core rendering: ceiling, floor, wall pixels

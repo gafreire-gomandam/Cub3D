@@ -40,6 +40,10 @@ void	init_delta_distance(t_raycast *ray)
 		ray->delta_dist_y = fabs(1.0 / ray->dir_y);
 }
 // calculates distance ray travels between grid lines (X,Y) axes
-// 
+// called once per ray after initializing direction
+/* dir_x == 0; ray never crosses vertical grid lines
+			set to 1e30 to avoid division by zero */
 // fabs() - single (f)double argument with absolute value
-// 
+// calculate x-axis delta distance; distance to travel 1 grid cell horizontally
+// 			then do it again for Y-axis
+// usage: for DDA algorithm to efficiently step through grid

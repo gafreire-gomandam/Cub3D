@@ -21,9 +21,6 @@ static void	rotate_90_ccw(double *x, double *y)
 	*y = temp_x;
 }
 
-// rotate 2D vector 90 deg. CCW
-// store original x in temporary, x becomes negative y (rotated)
-// y becomes old x (completes the rotation).
 /*	DERIVATION:
  		since, cos(90) = 0, sin(90) = 1
  		new_x = x * cos(90°) - y * sin(90°) --> new_x = -y;
@@ -39,7 +36,7 @@ void	init_camera_plane(t_game *game)
 }
 
 // constructs camera plane perpendicular to player direction FOV
-// copy direction vector to plane vector -> player.plane (x,y) to player.dir_ (x,y)
+// copy dir. vector to plane vector -> player.plane (x,y) to player.dir_ (x,y)
 // rotate plane 90 deg. to make it perpendicular
 // scale plane to 0.66 FOV == larger->fisheye, smaller->narrow tunnel vision
 // usage: setups camera raycasting. plane width determines FOV
