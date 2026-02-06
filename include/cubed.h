@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 04:14:20 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/05 16:37:04 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:48:08 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,9 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 
-# define MOVE_SPEED 0.05
-# define ROT_SPEED 0.05
+# define MOVE_SPEED 0.03
+# define ROT_SPEED 0.03
+# define ON_KEYUP 3
 
 # define ON_KEYDOWN 2
 # define ON_DESTROY 17
@@ -101,6 +102,13 @@ typedef struct s_game
 	t_player		player;
 	t_image			image;
 	t_gfx			gfx;
+
+	int				key_w;
+	int				key_s;
+	int				key_a;
+	int				key_d;
+	int				key_left;
+	int				key_right;
 }					t_game;
 
 typedef struct s_raycast
@@ -169,6 +177,8 @@ void				start_game(t_game *game);
 // src/graphics/game_hooks.c
 int					close_window(t_game *game);
 int					key_press(int keycode, t_game *game);
+int					key_release(int keycode, t_game *game);
+int					game_loop(t_game *game);
 
 // src/graphics/render.c
 void				render_frame(t_game *game);

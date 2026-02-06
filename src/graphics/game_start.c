@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:40:21 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/03 13:45:27 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/06 12:17:11 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	start_game(t_game *game)
 	init_image(game);
 	render_frame(game);
 	mlx_hook(game->gfx.win, ON_KEYDOWN, 1L << 0, key_press, game);
+	mlx_hook(game->gfx.win, ON_KEYUP, 1L << 1, key_release, game);
 	mlx_hook(game->gfx.win, ON_DESTROY, 0, close_window, game);
+	mlx_loop_hook(game->gfx.mlx, game_loop, game);
 	mlx_loop(game->gfx.mlx);
 }
