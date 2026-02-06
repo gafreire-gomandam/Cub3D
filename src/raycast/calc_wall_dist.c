@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// calculate perpendicular distancem and walls side
-
 #include "cubed.h"
 
 void	calc_wall_dist(t_game *game, t_raycast *ray)
@@ -28,7 +26,7 @@ void	calc_wall_dist(t_game *game, t_raycast *ray)
 
 // Checks for horizontal or vertical side. vertical 0, horizontal  1
 // map_x on the grid where wall hit, while player.pos_x is the starting point
-// (1 - step_x) / 2 == if step_x 1 move right, -1 move left (distance to L or R face of cell)
+// (1 - step_x) / 2 == if step_x 1 move right, -1 move left (distance to L or R)
 // map_y == step_y = 1 distance to top face, step_y = -1 distance to bottom face
 // if (ray->perp_wall_dist < 0.0001) ensures safe distance value for rendering.
 // 	prevent division by zero, distorts when player touches wall

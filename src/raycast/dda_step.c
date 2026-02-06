@@ -10,8 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// steps, perform DDA, check for hits. Distance ray travels between grid lines
-
 #include "../../include/cubed.h"
 
 static int	check_wall_hit(t_game *game, t_raycast *ray)
@@ -47,7 +45,7 @@ static void	step_ray(t_raycast *ray)
 }
 
 // advance ray one cell, x or y dir. called repeatedly until wall hits
-// if (ray->side_dist_x < ray->side_dist_y) -> check if x-side is closer than y-side
+// (ray->side_dist_x < ray->side_dist_y) -> checks closer: if x-side || y-side
 // advance to x-side, move to next cell/grid, mark hit as vertical side = 0
 // else () step in y-dir, mark horizontal side = 1
 
