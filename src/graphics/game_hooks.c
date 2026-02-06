@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:38:08 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/06 14:09:56 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:15:53 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ int	game_loop(t_game *game)
 	moved = process_movement(game);
 	if (game->key_right)
 	{
-		rotate_player(game, -ROT_SPEED);
+		rotate_player(game, ROT_SPEED);
 		moved = 1;
 	}
 	if (game->key_left)
 	{
-		rotate_player(game, ROT_SPEED);
+		rotate_player(game, -ROT_SPEED);
 		moved = 1;
 	}
 	if (moved)

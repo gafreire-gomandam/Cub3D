@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/02 17:41:34 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/05 17:41:19 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/06 15:09:52 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ static void	calculate_tex_x(t_game *game, t_raycast *ray)
 	ray->wall_x -= floor(ray->wall_x);
 	ray->tex_x = (int)(ray->wall_x
 			* (double)game->textures[ray->tex_num].width);
-	if ((ray->side == 0 && ray->dir_x > 0) || (ray->side == 1
-			&& ray->dir_y < 0))
+	if ((ray->side == 0 && ray->dir_x < 0) || (ray->side == 1
+			&& ray->dir_y > 0))
 		ray->tex_x = game->textures[ray->tex_num].width - ray->tex_x - 1;
 }
 
