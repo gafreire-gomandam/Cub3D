@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_camera.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 01:45:26 by gomandam          #+#    #+#             */
 /*   Updated: 2026/02/06 01:22:00 by gomandam         ###   ########.fr       */
@@ -17,8 +17,8 @@ static void	rotate_90_ccw(double *x, double *y)
 	double	temp_x;
 
 	temp_x = *x;
-	*x = *y;
-	*y = -temp_x;
+	*x = -(*y);
+	*y = temp_x;
 }
 
 // rotate 2D vector 90 deg. CCW
