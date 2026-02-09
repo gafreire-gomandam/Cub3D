@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   init_image.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 02:03:48 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/05 15:39:48 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/09 18:53:57 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cubed.h"
+
+/*
+	allocate off-screen buffer, retrieve direct memory access for pixels
+	during game initialization: sets up rendering target
+	create MLX image buffer, validate allocations
+	mlx_get_data_addr(); gets direct memory address of pixel data
+	stores metadata:
+		bits per pixel, line length (bytes per row), endian = byte order memory
+	usage: fast pixel writing
+*/
 
 void	init_image(t_game *game)
 {
@@ -27,13 +37,17 @@ void	init_image(t_game *game)
 			&game->image.line_length,
 			&game->image.endian);
 }
-// allocate off-screen buffer, retrieve direct memory access for pixels
-// during game initialization: sets up rendering target
-// create MLX image buffer, validate allocations
-// mlx_get_data_addr(); gets direct memory address of pixel data
-// stores metadata:
-// 	bits per pixel, line length (bytes per row), endian = byte order memory
-// usage: fast pixel writing
+
+/*
+	put a single pixel to image buffer using direct memory access
+	called per frame during rendering (thousands per column)
+	y * line_length == row offset in bytes
+	x * (bits_per_pixel / 8) == column offset in bytes 
+	(4 bytes per pixel 32-bit color)
+	get pointer to target pixel memory
+	write color value unsigned int (ARGB format)
+	used for core rendering: ceiling, floor, wall pixels
+*/
 
 void	put_pixel(t_image *image, int x, int y, int color)
 {
@@ -44,11 +58,3 @@ void	put_pixel(t_image *image, int x, int y, int color)
 	pixel = image->addr + offset;
 	*(unsigned int *)pixel = color;
 }
-// put a single pixel to image buffer using direct memory access
-// called per frame during rendering (thousands per column)
-// y * line_length == row offset in bytes
-/* x * (bits_per_pixel / 8) == column offset in bytes 
-		(4 bytes per pixel 32-bit color) */
-// get pointer to target pixel memory
-// write color value unsigned int (ARGB format)
-// used for core rendering: ceiling, floor, wall pixels

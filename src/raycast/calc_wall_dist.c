@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   calc_wall_dist.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gomandam <gomandam@student.42madrid.c      +#+  +:+       +#+        */
+/*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/15 21:02:18 by gomandam          #+#    #+#             */
-/*   Updated: 2026/02/04 04:10:31 by gomandam         ###   ########.fr       */
+/*   Updated: 2026/02/09 18:48:13 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cubed.h"
+
+/*
+	Checks for horizontal or vertical side. vertical 0, horizontal  1
+	map_x on the grid where wall hit, while player.pos_x is the starting point
+	(1 - step_x) / 2 == if step_x 1 move right, -1 move left (distance to L or R)
+	map_y == step_y = 1 distance to top face, step_y = -1 distance to bottom face
+	if (ray->perp_wall_dist < 0.0001) ensures safe distance value for rendering.
+	prevent division by zero, distorts when player touches wall
+*/
 
 void	calc_wall_dist(t_game *game, t_raycast *ray)
 {
@@ -23,10 +32,3 @@ void	calc_wall_dist(t_game *game, t_raycast *ray)
 	if (ray->perp_wall_dist < 0.0001)
 		ray->perp_wall_dist = 0.0001;
 }
-
-// Checks for horizontal or vertical side. vertical 0, horizontal  1
-// map_x on the grid where wall hit, while player.pos_x is the starting point
-// (1 - step_x) / 2 == if step_x 1 move right, -1 move left (distance to L or R)
-// map_y == step_y = 1 distance to top face, step_y = -1 distance to bottom face
-// if (ray->perp_wall_dist < 0.0001) ensures safe distance value for rendering.
-// 	prevent division by zero, distorts when player touches wall
