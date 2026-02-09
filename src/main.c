@@ -6,7 +6,7 @@
 /*   By: gafreire <gafreire@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/10 16:49:46 by gafreire          #+#    #+#             */
-/*   Updated: 2026/02/03 13:16:42 by gafreire         ###   ########.fr       */
+/*   Updated: 2026/02/09 12:22:37 by gafreire         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int	load_map_data(t_game *game)
 		5. start game
 */
 
-// revisar segfault
 int	main(int argc, char **argv)
 {
 	t_game	game;
